@@ -37,7 +37,7 @@
         </option>
         <option>
           <name>MacFile</name>
-          <state>$PROJ_DIR$\exec.mac</state>
+          <state>$PROJ_DIR$\..\exec.mac</state>
         </option>
         <option>
           <name>MemOverride</name>
