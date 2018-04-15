@@ -164,6 +164,12 @@ It is clocked from HFCLK.  To get the desired 1ms tick use a compare period of 0
                                 (GPIO_PIN_CNF_PULL_Disabled    << GPIO_PIN_CNF_PULL_Pos)  | \
                                 (GPIO_PIN_CNF_DRIVE_S0S1       << GPIO_PIN_CNF_DRIVE_Pos) | \
                                 (GPIO_PIN_CNF_SENSE_Disabled   << GPIO_PIN_CNF_SENSE_Pos) )
+#define P0_08_ANT_MRDY = 0x00000000
+#define P0_09_ANT_SRDY = 0x00000000
+#define P0_10_ANT_USPI2_CS = 0x00000003
+#define P0_11_ANT_USPI2_SCK = 0x00000003
+#define P0_12_ANT_USPI2_MIS = 0x00000000
+#define P0_13_ANT_USPI2_MOSI = 0x00000003
 
 
                                 
