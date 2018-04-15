@@ -64,7 +64,7 @@ void main(void)
   {
     while (1);
   }
-  
+
   /* Low Level Initialization Modules */
   WatchDogSetup(); /* During development, set to not reset processor if timeout */
   SysTickSetup();
