@@ -36,6 +36,7 @@ Type Definitions
 void WatchDogSetup(void);
 void PowerSetup(void);
 void GpioSetup(void);
+void SPISetup(void);
 void ClockSetup(void);
 void InterruptSetup(void);
 void SysTickSetup(void);
@@ -164,13 +165,31 @@ It is clocked from HFCLK.  To get the desired 1ms tick use a compare period of 0
                                 (GPIO_PIN_CNF_PULL_Disabled    << GPIO_PIN_CNF_PULL_Pos)  | \
                                 (GPIO_PIN_CNF_DRIVE_S0S1       << GPIO_PIN_CNF_DRIVE_Pos) | \
                                 (GPIO_PIN_CNF_SENSE_Disabled   << GPIO_PIN_CNF_SENSE_Pos) )
-#define P0_08_ANT_MRDY = 0x00000000
-#define P0_09_ANT_SRDY = 0x00000000
-#define P0_10_ANT_USPI2_CS = 0x00000003
-#define P0_11_ANT_USPI2_SCK = 0x00000003
-#define P0_12_ANT_USPI2_MIS = 0x00000000
-#define P0_13_ANT_USPI2_MOSI = 0x00000003
+#define P0_28_LED_YLW_CNF      (u32)0x00000003
+#define P0_27_LED_GRN_CNF      (u32)0x00000003
+#define P0_26_LED_BLU_CNF      (u32)0x00000003
 
+#define P0_08_ANT_MRDY         (u32)0x00000000
+#define P0_09_ANT_SRDY         (u32)0x00000000
+#define P0_10_ANT_USPI2_CS     (u32)0x00000003
+#define P0_11_ANT_USPI2_SCK    (u32)0x00000003
+#define P0_12_ANT_USPI2_MIS    (u32)0x00000000
+#define P0_13_ANT_USPI2_MOSI   (u32)0x00000003
+
+#define Enable_SPI             (u32)0x00000001
+#define Disable_SPI            (u32)0x00000000
+#define SPI_SCK_signal         (u32)0xFFFFF7FF
+#define SPI_MOSI_signal        (u32)0xFFFFDFFF
+#define SPI_master_MISO_signal (u32)0xFFFFEFFF
+#define SPI_CONFIG             (u32)0x00000003      //error?????
+
+#define SPI_FREQUENCY_K125     (u32)0x02000000
+#define SPI_FREQUENCY_K250     (u32)0x04000000
+#define SPI_FREQUENCY_K500     (u32)0x08000000
+#define SPI_FREQUENCY_M1       (u32)0x10000000
+#define SPI_FREQUENCY_M2       (u32)0x20000000
+#define SPI_FREQUENCY_M4       (u32)0x40000000
+#define SPI_FREQUENCY_M8       (u32)0x80000000
 
                                 
                                 

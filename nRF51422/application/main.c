@@ -55,6 +55,7 @@ void main(void)
   /* Clock, GPIO and SoftDevice setup */  
   ClockSetup();
   GpioSetup();
+  SPISetup();
 
   __enable_interrupt();
   
@@ -88,6 +89,11 @@ void main(void)
     SocIntegrationHandler();
     AntttRunActiveState();
    
+    if(NRF_SPI0->EVENTS_READY == 1)
+    {
+      NRF_GPIO->OUTSET = P0_28_;
+    }
+
     /* System sleep*/
     SystemSleep();
     

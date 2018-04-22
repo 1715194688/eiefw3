@@ -79,8 +79,34 @@ void GpioSetup(void)
 {
   /* Set all of the pin function registers in port 0 */
   NRF_GPIO->PIN_CNF[P0_29_INDEX] = P0_29_LED_RED_CNF;
-   
+  NRF_GPIO->PIN_CNF[P0_28_INDEX] = P0_28_LED_YLW_CNF;
+  NRF_GPIO->PIN_CNF[P0_27_INDEX] = P0_27_LED_GRN_CNF;
+  NRF_GPIO->PIN_CNF[P0_26_INDEX] = P0_26_LED_BLU_CNF;
+
+  NRF_GPIO->PIN_CNF[P0_08_INDEX] = P0_08_ANT_MRDY;
+  NRF_GPIO->PIN_CNF[P0_09_INDEX] = P0_09_ANT_SRDY;
+  NRF_GPIO->PIN_CNF[P0_10_INDEX] = P0_10_ANT_USPI2_CS;
+  NRF_GPIO->PIN_CNF[P0_11_INDEX] = P0_11_ANT_USPI2_SCK;
+  NRF_GPIO->PIN_CNF[P0_12_INDEX] = P0_12_ANT_USPI2_MIS;
+  NRF_GPIO->PIN_CNF[P0_13_INDEX] = P0_13_ANT_USPI2_MOSI;
+//OUTSET
+//EVENTS_READY
 } /* end GpioSetup() */
+
+
+void SPISetup(void)
+{
+  NRF_SPI0->ENABLE = Enable_SPI;
+  NRF_SPI0->PSELSCK = SPI_SCK_signal;
+  NRF_SPI0->PSELMOSI = SPI_MOSI_signal;
+  NRF_SPI0->PSELMISO = SPI_master_MISO_signal;
+  NRF_SPI0->CONFIG = SPI_CONFIG;
+  NRF_SPI0->FREQUENCY = SPI_FREQUENCY_K125;
+  NRF_SPI0->EVENTS_READY = 0;
+  NRF_GPIO->OUTCLR = P0_10_;
+
+  NRF_SPI0->TXD = 0x000000FF;
+}
 
 
 /*----------------------------------------------------------------------------------------------------------------------
