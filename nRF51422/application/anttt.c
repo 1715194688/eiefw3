@@ -97,7 +97,7 @@ State: AntttSM_Idle
 */
 static void AntttSM_Idle(void)
 {
-    
+    NRF_GPIO->OUTSET = BIT29;
 } 
 
 
