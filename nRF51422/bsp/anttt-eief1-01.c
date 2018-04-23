@@ -87,13 +87,17 @@ void GpioSetup(void)
   NRF_GPIO->PIN_CNF[P0_09_INDEX] = P0_09_ANT_SRDY;
   NRF_GPIO->PIN_CNF[P0_10_INDEX] = P0_10_ANT_USPI2_CS;
   NRF_GPIO->PIN_CNF[P0_11_INDEX] = P0_11_ANT_USPI2_SCK;
-  NRF_GPIO->PIN_CNF[P0_12_INDEX] = P0_12_ANT_USPI2_MIS;
+  NRF_GPIO->PIN_CNF[P0_12_INDEX] = P0_12_ANT_USPI2_MISO;
   NRF_GPIO->PIN_CNF[P0_13_INDEX] = P0_13_ANT_USPI2_MOSI;
-//OUTSET
-//EVENTS_READY
 } /* end GpioSetup() */
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+Function: SPIOSetup
+
+Description
+Loads all registers required to set up SPI on the processor.
+*/
 void SPISetup(void)
 {
   NRF_SPI0->ENABLE = Enable_SPI;
@@ -106,7 +110,7 @@ void SPISetup(void)
   NRF_GPIO->OUTCLR = P0_10_;
 
   NRF_SPI0->TXD = 0x000000FF;
-}
+} /* end SPISetup() */
 
 
 /*----------------------------------------------------------------------------------------------------------------------

@@ -173,15 +173,21 @@ It is clocked from HFCLK.  To get the desired 1ms tick use a compare period of 0
 #define P0_09_ANT_SRDY         (u32)0x00000000
 #define P0_10_ANT_USPI2_CS     (u32)0x00000003
 #define P0_11_ANT_USPI2_SCK    (u32)0x00000003
-#define P0_12_ANT_USPI2_MIS    (u32)0x00000000
+#define P0_12_ANT_USPI2_MISO   (u32)0x00000000
 #define P0_13_ANT_USPI2_MOSI   (u32)0x00000003
 
+
+/***********************************************************************************************************************
+##### SPIO setup values
+***********************************************************************************************************************/
+
+/* SPI configuration */
 #define Enable_SPI             (u32)0x00000001
 #define Disable_SPI            (u32)0x00000000
 #define SPI_SCK_signal         (u32)0xFFFFF7FF
 #define SPI_MOSI_signal        (u32)0xFFFFDFFF
 #define SPI_master_MISO_signal (u32)0xFFFFEFFF
-#define SPI_CONFIG             (u32)0x00000003      //error?????
+#define SPI_CONFIG             (u32)0x00000003      // May be wrong!!!
 
 #define SPI_FREQUENCY_K125     (u32)0x02000000
 #define SPI_FREQUENCY_K250     (u32)0x04000000
