@@ -97,19 +97,17 @@ State: AntttSM_Idle
 */
 static void AntttSM_Idle(void)
 {
-  //NRF_GPIO->OUTSET = P0_28_;
+  NRF_GPIO->OUTSET = P0_28_;
+  //NRF_GPIO->OUTCLR = P0_26_;
 
-  /*NRF_GPIO->DIRSET = 0x00002C00;
-  NRF_GPIO->DIRCLR = 0x00001300;*/
-
-  NRF_GPIO->OUTCLR = P0_10_;
   NRF_SPI0->TXD = 0x000000FF;
 
   if(NRF_SPI0->EVENTS_READY == 1)
   {
+    NRF_SPI0->EVENTS_READY = 0;
     NRF_GPIO->OUTSET = P0_26_;
   }
-} 
+}
 
 
 

@@ -62,6 +62,15 @@ Variable names shall start with "UserApp1_<type>" and be declared as static.
 static fnCode_type UserApp1_pfStateMachine;               /*!< @brief The state machine function pointer */
 //static u32 UserApp1_u32Timeout;                           /*!< @brief Timeout counter used across states */
 
+static SspConfigurationType SAM3U2_SspConfiguration;
+
+static u8 au8RxBuffer[128];
+static u8* pu8RxBufferNextChar;
+static u8 U8_NRF_BUFFER_SIZE = 128;
+
+static SspPeripheralType* UserApp_Ssp;
+
+
 
 /**********************************************************************************************************************
 Function Definitions
@@ -92,8 +101,21 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
+  SAM3U2_SspConfiguration.SspPeripheral         = USART2;
+  SAM3U2_SspConfiguration.pCsGpioAddress        = AT91C_BASE_PIOB;
+  SAM3U2_SspConfiguration.u32CsPin              = AT91C_PIO_PB22;
+  SAM3U2_SspConfiguration.eBitOrder             = LSB_FIRST;
+  SAM3U2_SspConfiguration.eSspMode              = SPI_SLAVE_FLOW_CONTROL;
+  SAM3U2_SspConfiguration.pu8RxBufferAddress    = au8RxBuffer;
+  SAM3U2_SspConfiguration.ppu8RxNextByte        = &pu8RxBufferNextChar;
+  SAM3U2_SspConfiguration.u16RxBufferSize       = U8_NRF_BUFFER_SIZE;
+  SAM3U2_SspConfiguration.fnSlaveTxFlowCallback = SlaveTxFlowControlCallback;
+  SAM3U2_SspConfiguration.fnSlaveRxFlowCallback = SlaveRxFlowControlCallback;
+
+  UserApp_Ssp = SspRequest(&SAM3U2_SspConfiguration);
+
   /* If good initialization, set state to Idle */
-  if( 1 )
+  if(UserApp_Ssp != NULL)
   {
     UserApp1_pfStateMachine = UserApp1SM_Idle;
   }
@@ -140,9 +162,22 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp1SM_Idle(void)
 {
-    
+  LedOn(PURPLE);
 } /* end UserApp1SM_Idle() */
-     
+
+
+static void SlaveTxFlowControlCallback(void)
+{
+
+}
+
+
+static void SlaveRxFlowControlCallback(void)
+{
+  LedOn(YELLOW);
+  Delay(5);
+  LedOff(YELLOW);
+}
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* Handle an error */
@@ -151,6 +186,17 @@ static void UserApp1SM_Error(void)
   
 } /* end UserApp1SM_Error() */
 
+
+
+
+static void Delay(u32 TIME_LIMIT)
+{
+  u32 i = 0;
+  u8 j;
+
+  for(i = TIME_LIMIT; i>0; i--)
+    for(j = 100; j>0; j--);
+}
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/

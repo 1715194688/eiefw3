@@ -187,7 +187,7 @@ It is clocked from HFCLK.  To get the desired 1ms tick use a compare period of 0
 #define SPI_SCK_signal         (u32)0xFFFFF7FF
 #define SPI_MOSI_signal        (u32)0xFFFFDFFF
 #define SPI_master_MISO_signal (u32)0xFFFFEFFF
-#define SPI_CONFIG             (u32)0x00000003      // May be wrong!!!
+#define SPI_CONFIG             (u32)0x00000007      // May be wrong!!!
 
 #define SPI_FREQUENCY_K125     (u32)0x02000000
 #define SPI_FREQUENCY_K250     (u32)0x04000000
