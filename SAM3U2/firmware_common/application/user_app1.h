@@ -21,7 +21,7 @@ To start a new task using this user_app1 as a template:
 /**********************************************************************************************************************
 Type Definitions
 **********************************************************************************************************************/
-
+#define U8_NRF_BUFFER_SIZE         (u8)128
 
 /**********************************************************************************************************************
 Function Declarations
@@ -53,7 +53,7 @@ static void UserApp1SM_Error(void);
 static void SlaveTxFlowControlCallback(void);
 static void SlaveRxFlowControlCallback(void);
 
-static void Delay(u32 TIME_LIMIT);
+//static void Delay(u32 TIME_LIMIT);
 
 
 

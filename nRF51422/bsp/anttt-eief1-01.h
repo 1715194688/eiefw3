@@ -153,6 +153,26 @@ It is clocked from HFCLK.  To get the desired 1ms tick use a compare period of 0
 #define P0_00_INDEX          (u32)0
 
 
+/* Choose pins 
+*/
+#define P0_26_LED_BLUE       (u32)0x04000000
+#define P0_27_LED_GREEN      (u32)0x08000000
+#define P0_28_LED_YELLOW     (u32)0x10000000
+#define P0_29_LED_RED        (u32)0x20000000
+
+#define P0_10_CS             (u32)0x00000400
+#define P0_11_SCK            (u32)0x00000800
+#define P0_12_MISO           (u32)0x00001000
+#define P0_13_MOSI           (u32)0x00002000
+
+
+
+
+
+
+
+
+
 
 /***********************************************************************************************************************
 ##### GPIO setup values

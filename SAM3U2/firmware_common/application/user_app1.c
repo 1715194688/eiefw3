@@ -64,9 +64,9 @@ static fnCode_type UserApp1_pfStateMachine;               /*!< @brief The state 
 
 static SspConfigurationType SAM3U2_SspConfiguration;
 
-static u8 au8RxBuffer[128];
+static u8 au8RxBuffer[U8_NRF_BUFFER_SIZE];
 static u8* pu8RxBufferNextChar;
-static u8 U8_NRF_BUFFER_SIZE = 128;
+//static u8 U8_NRF_BUFFER_SIZE = 128;
 
 static SspPeripheralType* UserApp_Ssp;
 
@@ -113,6 +113,8 @@ void UserApp1Initialize(void)
   SAM3U2_SspConfiguration.fnSlaveRxFlowCallback = SlaveRxFlowControlCallback;
 
   UserApp_Ssp = SspRequest(&SAM3U2_SspConfiguration);
+
+  AT91C_BASE_PIOB->PIO_ODR = PB_21_ANT_RESET;
 
   /* If good initialization, set state to Idle */
   if(UserApp_Ssp != NULL)
@@ -162,6 +164,7 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp1SM_Idle(void)
 {
+  //LedOff(YELLOW);
   LedOn(PURPLE);
 } /* end UserApp1SM_Idle() */
 
@@ -175,28 +178,14 @@ static void SlaveTxFlowControlCallback(void)
 static void SlaveRxFlowControlCallback(void)
 {
   LedOn(YELLOW);
-  Delay(5);
-  LedOff(YELLOW);
 }
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* Handle an error */
 static void UserApp1SM_Error(void)          
 {
-  
+  LedOn(RED);
 } /* end UserApp1SM_Error() */
-
-
-
-
-static void Delay(u32 TIME_LIMIT)
-{
-  u32 i = 0;
-  u8 j;
-
-  for(i = TIME_LIMIT; i>0; i--)
-    for(j = 100; j>0; j--);
-}
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/
