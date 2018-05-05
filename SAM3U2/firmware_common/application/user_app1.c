@@ -101,6 +101,8 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
+  nrfInterface_pu8RxBufferNextChar = nrfInterface_au8RxBuffer;
+
   SAM3U2_SspConfiguration.SspPeripheral         = USART2;
   SAM3U2_SspConfiguration.pCsGpioAddress        = AT91C_BASE_PIOB;
   SAM3U2_SspConfiguration.u32CsPin              = AT91C_PIO_PB22;
