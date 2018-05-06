@@ -116,8 +116,6 @@ void UserApp1Initialize(void)
 
   UserApp_Ssp = SspRequest(&SAM3U2_SspConfiguration);
 
-  //AT91C_BASE_PIOB->PIO_ODR = PB_21_ANT_RESET;
-
   /* If good initialization, set state to Idle */
   if(UserApp_Ssp != NULL)
   {
@@ -182,9 +180,10 @@ void SlaveRxFlowControlCallback(void)
 {
   LedOn(YELLOW);
 
-  for(u32 i = 500000; i>0; i--)
+  for(u32 i = 5000000; i>0; i--)
   {
   }
+
   LedOff(YELLOW);
 }
 
@@ -204,7 +203,7 @@ static void UserApp1SM_Tx(void)
 /* Handle an error */
 static void UserApp1SM_Error(void)          
 {
-  LedOn(RED);
+  LedOn(PURPLE);
 } /* end UserApp1SM_Error() */
 
 
