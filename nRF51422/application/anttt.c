@@ -59,6 +59,8 @@ Promises:
 void AntttInitialize(void)
 {
   Anttt_pfnStateMachine = AntttSM_Idle;
+
+  //NRF_GPIO->OUTCLR = P0_28_LED_YELLOW;
   
 } /* end AntttInitialize() */
 
@@ -97,15 +99,23 @@ State: AntttSM_Idle
 */
 static void AntttSM_Idle(void)
 {
-  NRF_GPIO->OUTSET = P0_28_LED_YELLOW;
-  //NRF_GPIO->OUTCLR = P0_26_LED_BLUE;
+  u32 u32RxBuffer = 0;
 
   NRF_SPI0->TXD = 0x000000FF;
+  //nrf_delay_us(500000);
+  NRF_GPIO->OUTSET = P0_28_LED_YELLOW;
+  nrf_delay_us(500000);
+  NRF_GPIO->OUTCLR = P0_28_LED_YELLOW;
 
   if(NRF_SPI0->EVENTS_READY == 1)
   {
+    u32RxBuffer = NRF_SPI0->RXD;
+
     NRF_SPI0->EVENTS_READY = 0;
+    //nrf_delay_us(500000);
     NRF_GPIO->OUTSET = P0_26_LED_BLUE;
+    nrf_delay_us(500000);
+    NRF_GPIO->OUTCLR = P0_26_LED_BLUE;
   }
 }
 

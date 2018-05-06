@@ -101,7 +101,7 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
-  nrfInterface_pu8RxBufferNextChar = nrfInterface_au8RxBuffer;
+  pu8RxBufferNextChar = au8RxBuffer;
 
   SAM3U2_SspConfiguration.SspPeripheral         = USART2;
   SAM3U2_SspConfiguration.pCsGpioAddress        = AT91C_BASE_PIOB;
@@ -116,11 +116,13 @@ void UserApp1Initialize(void)
 
   UserApp_Ssp = SspRequest(&SAM3U2_SspConfiguration);
 
-  AT91C_BASE_PIOB->PIO_ODR = PB_21_ANT_RESET;
+  //AT91C_BASE_PIOB->PIO_ODR = PB_21_ANT_RESET;
 
   /* If good initialization, set state to Idle */
   if(UserApp_Ssp != NULL)
   {
+    LedPWM(WHITE, LED_PWM_5);
+
     UserApp1_pfStateMachine = UserApp1SM_Idle;
   }
   else
@@ -166,22 +168,38 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp1SM_Idle(void)
 {
-  //LedOff(YELLOW);
-  LedOn(PURPLE);
+  LedOn(RED);
 } /* end UserApp1SM_Idle() */
 
 
-static void SlaveTxFlowControlCallback(void)
+void SlaveTxFlowControlCallback(void)
 {
-
+  //UserApp1_pfStateMachine = UserApp1SM_Rx;
 }
 
 
-static void SlaveRxFlowControlCallback(void)
+void SlaveRxFlowControlCallback(void)
 {
   LedOn(YELLOW);
+
+  for(u32 i = 500000; i>0; i--)
+  {
+  }
+  LedOff(YELLOW);
 }
 
+
+static void UserApp1SM_Rx(void)
+{
+
+  LedOn(GREEN);
+}
+
+
+static void UserApp1SM_Tx(void)
+{
+
+}
 /*-------------------------------------------------------------------------------------------------------------------*/
 /* Handle an error */
 static void UserApp1SM_Error(void)          

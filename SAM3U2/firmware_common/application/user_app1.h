@@ -38,6 +38,8 @@ Function Declarations
 void UserApp1Initialize(void);
 void UserApp1RunActiveState(void);
 
+void SlaveTxFlowControlCallback(void);
+void SlaveRxFlowControlCallback(void);
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*! @privatesection */                                                                                            
@@ -50,10 +52,8 @@ State Machine Declarations
 static void UserApp1SM_Idle(void);    
 static void UserApp1SM_Error(void);        
 
-static void SlaveTxFlowControlCallback(void);
-static void SlaveRxFlowControlCallback(void);
-
-//static void Delay(u32 TIME_LIMIT);
+static void UserApp1SM_Rx(void);
+static void UserApp1SM_Tx(void);
 
 
 
